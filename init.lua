@@ -156,6 +156,15 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Writes buffers to file automatically when focus is changed or application exit.
+vim.opt.autowriteall = true
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
+  pattern = { '*' },
+  callback = function()
+    vim.cmd 'wall'
+  end,
+})
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
