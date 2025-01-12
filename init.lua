@@ -159,7 +159,9 @@ vim.opt.scrolloff = 10
 -- Writes buffers to file automatically when focus is changed or application exit.
 vim.opt.autowriteall = true
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
-  pattern = { '*' },
+  -- Slight hack to not try to write any unnamed buffers.
+  -- A drawback with this is that the filename must contain a period to be autosaved.
+  pattern = { '*.*' },
   callback = function()
     vim.cmd 'wall'
   end,
