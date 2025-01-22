@@ -8,5 +8,12 @@ return {
   opts = {
     suppressed_dirs = { '~/', '/' },
     -- log_level = 'debug',
+    --    save_extra_cmds = {
+    --        function ()
+    --          local dbs = vim.g.dbs
+    --          if #dbs == 0 then return nil end
+    --          return dbs
+    --        end
+    --    },
   },
 }

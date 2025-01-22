@@ -484,6 +484,17 @@ require('lazy').setup({
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
     },
+    opts = {
+      setup = {
+        jdtls = function()
+          require('java').setup {
+            root_markers = {
+              'pom.xml',
+            },
+          }
+        end,
+      },
+    },
     config = function()
       -- Brief aside: **What is LSP?**
       --
@@ -644,7 +655,20 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
+        jdtls = {
+          settings = {
+            java = {
+              configuration = {
+                runtimes = {
+                  {
+                    name = 'JavaSE-21',
+                    path = '/Users/gry346/.sdkman/candidates/java/21.0.1-tem',
+                  },
+                },
+              },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -659,6 +683,7 @@ require('lazy').setup({
             },
           },
         },
+        rust_analyzer = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -677,10 +702,15 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'google-java-format',
+        'rustfmt',
+        'sqlfmt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        ensure_installed = {},
+        automatic_installation = true,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
