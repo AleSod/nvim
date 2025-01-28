@@ -95,6 +95,8 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'javadbg',
+        'javatest',
       },
     }
 
@@ -144,5 +146,7 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+    require('java-debug-adapter').setup {}
+    require('java-test').setup {}
   end,
 }
