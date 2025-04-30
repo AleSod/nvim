@@ -16,8 +16,21 @@ return {
   opts = {
     filesystem = {
       window = {
+        width = 100,
         mappings = {
           ['\\'] = 'close_window',
+        },
+      },
+      renderers = {
+        directory = {
+          { 'indent' },
+          { 'icon' },
+          { 'name' },
+        },
+        file = {
+          { 'indent' },
+          { 'icon' },
+          { 'name' },
         },
       },
     },
